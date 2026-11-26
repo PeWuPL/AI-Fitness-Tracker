@@ -1,26 +1,31 @@
 # Otwarte kwestie i niespójności
 
-## Arkusz WBS (`estimates/WBS_SAMOZAMYKACZ_2026_2.xlsx`)
-1. **Wiersze 3 i 9 nie mają godzin PW.** Etykiety szablonu Delphi zajmują ich komórki:
-   J3 „ilość godzin szacowana indywidualnie” (zadanie: repozytorium, 0,5 h przed skróceniem)
-   i J9:O9 „suma” (zadanie: konfiguracja JWT, 4 h przed skróceniem). Propozycja: przenieść etykiety
-   nad tabelę i dopisać godziny (po skróceniu ×0,5: 0,5 h i 2 h).
-2. **Wiersze 256–285 to prawdopodobnie pozostałość** po poprzedniej wersji (powielone tokeny, API,
-   logowanie, bez kategorii nadrzędnej). Bez godzin, poza sumą. Do usunięcia.
-3. **Możliwe podwójne liczenie filtrowania:** „Home → filtrowanie listy aktywności” oraz osobna gałąź
-   „Filtrowanie historii aktywności”. Usunąć jedno z nich.
-4. Nagłówek J2 nadal „Imię i Nazwisko” — wpisać „PW”. Kolumny K–N, O, H i kamienie milowe (A) do uzupełnienia.
-5. W v2026_2 nie ma gałęzi testów, wdrożenia ani CI/CD (były w pierwszej wersji). Do decyzji, czy wracają.
+Stan: SRS z .docx i WBS v2026_3 (2026-11-26).
 
-## SRS vs WBS
-6. **Cele treningowe** (WBS: O mnie → Cele treningowe: encja Cel, CRUD, obliczanie postępu, wyświetlanie postępu)
-   nie mają jeszcze sekcji w SRS. Dopisać punkt 3.x i pojęcie w słowniku.
-7. **Filtrowanie historii** jest w SRS jako WF-6.2; WBS ma je jako osobną gałąź z dodatkowymi wymaganiami
-   (łączenie filtrów, czyszczenie, komunikat przy braku wyników) — rozważyć doprecyzowanie WF-6.x.
-8. **Administrator:** SRS ma UŻ-3 i sekcję 3.11, ale WBS usunął gałąź administracji, a autoryzacja ma tylko
-   `ROLE_USER`. Zdecydować: wyciąć administratora z SRS albo przywrócić w WBS.
-9. **Kalorie:** przyjęto ręczne wpisywanie przez użytkownika. Alternatywa: szacowanie z formy ćwiczenia,
-   czasu i wagi z profilu (wymagałoby nowego wymagania).
+## SRS — niespójności wewnętrzne
+1. **Reset hasła:** IK-5 mówi, że nie ma e-maili resetu hasła, a WBS ma makietę, tokeny, endpointy i frontend
+   resetu (wiersze 26, 29, 42, 54, 68). Usunąć z WBS albo dopisać wymaganie w SRS.
+2. **Wersja angielska:** 2.3 — „opcjonalne rozszerzenie”; WF-12.16 i WIL-1 — wymóg PL + EN. Ustalić jedno.
+   WF-12.16 lepiej pasuje do sekcji 7 niż do dostępności.
+3. **WF-12.17 powtarza WF-12.10** (oznaczenia wykresów nie tylko kolorem). Usunąć jedno.
+4. **Strefa czasowa:** WIL-2 — polska strefa; WBS — „przechowywanie dat w UTC, konwersja do strefy użytkownika”.
+5. **Puste sekcje .docx:** tabela wersji (szablon 0.1.0/2022), 1.4 Odwołania, 4.1 Model danych, 8, Suplement A
+   (słownik — propozycja w `SRS.md`), Suplement B (storytelling/makiety).
+
+## WBS v2026_3
+6. **Możliwe podwójne liczenie filtrowania:** „Home → filtrowanie listy aktywności” (wiersz 100) oraz gałąź
+   „Filtrowanie historii aktywności” (wiersze 132–141).
+7. **Brak gałęzi testów, wdrożenia i CI/CD**, choć kamień milowy w A22 to „Wdrożenie Aplikacji”.
+8. **Kolumna H (kto wykonuje) pusta** — przypisać zadania.
+9. **Ok. 90 zadań-liści bez godzin** u wszystkich osób. Szacowanie zamknięte przez prowadzącego, więc tylko do wiadomości.
 
 ## Ogólne
-10. Skład zespołu (osoby do kolumn J–N i H) i terminy etapów/kamieni milowych od prowadzącego.
+10. **Kalorie:** przyjęto ręczne wpisywanie. Alternatywa: szacowanie z formy, czasu i wagi z profilu (nowe wymaganie).
+11. Terminy kamieni milowych od prowadzącego.
+
+## Rozwiązane (2026-11-26)
+- Administrator usunięty z SRS (klasy: UŻ-1 niezalogowany, UŻ-2 zarejestrowany) — zgodne z WBS (`ROLE_USER`).
+- Cele treningowe opisane w SRS (WF-9.4–9.6, UI-10.2).
+- Filtrowanie historii ma osobną sekcję 3.11 (WF-11.1–11.5).
+- Pozostałości w arkuszu (dawne wiersze 256–285) usunięte; etykiety szablonu nie kolidują z godzinami.
+- Skład zespołu wpisany w K2:N2.
