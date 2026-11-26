@@ -43,7 +43,8 @@ Bottom ribbon with 3 buttons: **Menu główne (Home)**, **Mierzenie aktywności 
   When the user says they were updated, re-read them and sync the files below.
 - `docs/SRS.md` — Markdown mirror of the SRS .docx (sections 1–8, UI-x, IP/IS/IK, WN, WIL, glossary proposal).
 - `docs/WBS.md` — WBS layout, per-person totals, version history.
-- `docs/estimates/WBS_SAMOZAMYKACZ_2026_3.xlsx` — copy of the latest WBS spreadsheet.
+- `docs/estimates/WBS_SAMOZAMYKACZ_2026.xlsx` — repo copy of the WBS, **same name as the master file**.
+  Replace it in place on every update; git keeps history. Never add version suffixes (`_2`, `_3`…).
 - `docs/OPEN_ISSUES.md` — unresolved questions and known inconsistencies. Check before editing docs.
 - Reading the files: no pandoc/python-docx/openpyxl system-wide — parse .docx XML with `zipfile`,
   and use openpyxl from a throwaway venv.
@@ -69,7 +70,10 @@ Bottom ribbon with 3 buttons: **Menu główne (Home)**, **Mierzenie aktywności 
 ## Status / where we left off
 - SRS .docx has sections 1–7 filled (functional reqs 3.1–3.12, UI-1…UI-13, interfaces, quality, i18n);
   still empty: 1.4, 4.1 data model, 8, glossary (Suplement A), Suplement B.
-- WBS v2026_3: estimates from all four members — PW 74 h, GG 53 h, PE 126.5 h, MM 158 h. Closed.
+- WBS: estimates from all four members — PW 74 h, GG 53 h, PE 126.5 h, MM 158 h. Closed.
+- Repo WBS has extra sheets: `WBS (czysty)` (no red/struck rows), `Backend` and `Frontend`
+  (work packages `B-x.y`/`F-x.y` under shared milestones M1–M7; column H free for assignees).
+  See `docs/WBS.md`. The original `WBS` sheet stays untouched.
 - Don't edit the .docx/.xlsx master copies unless asked; the user fixes typos in the .docx themselves.
 - Next likely steps: resolve `docs/OPEN_ISSUES.md`, assign tasks (column H), milestone dates,
   data model (ERD), mockups, then scaffold the Symfony + Next.js repos.
