@@ -1,7 +1,11 @@
 # WBS i szacowanie (metoda Delphi)
 
-Plik: `estimates/WBS_SAMOZAMYKACZ_2026.xlsx` — ta sama nazwa co plik główny zespołu. Przy każdej zmianie
-podmieniamy ten plik; poprzednie wersje są w historii gita (bez przyrostków `_2`, `_3`…).
+Plik: `estimates/WBS_SAMOZAMYKACZ_2026.xlsx` — ta sama nazwa co plik główny zespołu, ale z dodatkowymi
+arkuszami. Po zmianie pliku głównego nie kopiujemy go, tylko generujemy na nowo:
+`python tools/wbs_build.py ../WBS_SAMOZAMYKACZ_2026.xlsx docs/estimates/WBS_SAMOZAMYKACZ_2026.xlsx`
+(openpyxl: `pip install -r tools/requirements.txt`). Poprzednie wersje są w historii gita.
+
+**Kod kolorów w arkuszu `WBS`:** zadanie czerwone lub przekreślone = poza zakresem, nie trafia do pakietów.
 Ten dokument jest tylko podsumowaniem — wiążący jest arkusz.
 
 > **Szacowanie zamknięte.** Notatka prowadzącego (WBS!O3): „proszę już tego nie uzupełniać tylko skupić się
