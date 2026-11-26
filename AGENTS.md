@@ -25,7 +25,9 @@ wants template questions answered **directly** (bullet question → direct answe
 - **UŻ-2** Użytkownik zarejestrowany — logs activities, charts, history (filter/sort), summaries,
   training goals, own exercise types, account settings. Sees only own data.
 - **No administrator and no trainer/coach role** — both removed by the user. Do not reintroduce them.
-- No password-reset e-mails (SRS IK-5); only activation e-mails via SMTP.
+- **Local project, no deployment** (team decision 2026-11-26): no e-mails/SMTP at all — out of scope are
+  activation e-mail (WF-1.2), password change (WF-10.2), account deletion (WF-10.5), password reset.
+  The .docx still lists some of these; `docs/SRS.md` shows them struck through. No deploy/CI/CD work.
 - Data is entered **manually** (no automatic sensor/device sync — it's a web app).
 
 ## UI (as described by the user)
