@@ -46,16 +46,17 @@ Bottom ribbon with 3 buttons: **Menu główne (Home)**, **Mierzenie aktywności 
   configuration, high-contrast mode) — pending team decision, `docs/OPEN_ISSUES.md` item 5.
 
 ## Repo docs
-- The user's master copies live **outside the repo**, one level up:
-  `../SRS-SAMOZAMYKACZ_2026.docx` and `../WBS_SAMOZAMYKACZ_2026.xlsx`. They win over repo copies.
-  Don't edit them unless asked; the user fixes typos in the .docx themselves.
+- SRS master lives **outside the repo**: `../SRS-SAMOZAMYKACZ_2026.docx` (wins over `docs/SRS.md`).
+  Don't edit it unless asked; the user fixes typos in the .docx themselves.
+- WBS master is **the repo file** `docs/estimates/WBS_SAMOZAMYKACZ_2026.xlsx` since 2026-11-26 — the team
+  edits it directly (assignments, estimate changes). `../WBS_SAMOZAMYKACZ_2026.xlsx` is **outdated**.
 - `docs/SRS.md` — Markdown mirror of the SRS .docx (sections 1–8, UI-x, IP/IS/IK, WN, WIL, glossary proposal),
   plus struck-through out-of-scope items. When the .docx changes, re-read it and update the mirror.
 - `docs/WBS.md` — sheets, milestones, package table, hour totals, version history.
-- `docs/estimates/WBS_SAMOZAMYKACZ_2026.xlsx` — **not a plain copy**: master `WBS` sheet + 3 generated
-  sheets. Same file name as the master; replace in place, git keeps history. No version suffixes (`_2`, `_3`…).
+- `docs/estimates/WBS_SAMOZAMYKACZ_2026.xlsx` — `WBS` sheet + 3 derived sheets with the team's assignments.
+  Keep this one file name; git keeps history. No version suffixes (`_2`, `_3`…).
 - `docs/OPEN_ISSUES.md` — unresolved questions and known inconsistencies. Check before editing docs.
-- `tools/wbs_build.py` — regenerates the derived WBS sheets (see below).
+- `tools/wbs_build.py` — first-time generator of the derived sheets. **Do not run it on the current file** (see below).
 - Reading the files: no pandoc/python-docx/openpyxl system-wide — parse .docx XML with `zipfile`,
   and use openpyxl from a throwaway venv (`pip install -r tools/requirements.txt`).
 
@@ -63,26 +64,30 @@ Bottom ribbon with 3 buttons: **Menu główne (Home)**, **Mierzenie aktywności 
 Sheets in the repo file:
 | Sheet | What it is |
 |---|---|
-| `WBS` | The team's master sheet, copied unchanged. |
-| `WBS (czysty)` | `WBS` without red and struck-through tasks (and branches left empty). |
-| `Backend` / `Frontend` | **Work packages to assign people from.** |
+| `WBS` | The team's sheet: task tree and estimates. |
+| `WBS - Czysty` | `WBS` without red and struck-through tasks (and branches left empty). |
+| `Backend` / `Frontend` | **Work packages with assignments** (who does what). |
 
 - **Colour code in `WBS`:** red (`FFFF0000`) or struck-through task = **out of scope / dropped**;
   it never goes into the packages, even if it has hours.
-- Sheet `WBS` layout: tree levels in columns **B–E** (B = top level), A = milestones, H = assignee (empty),
+- Sheet `WBS` layout: tree levels in columns **B–E** (B = top level), A = milestones,
   J = template labels, **K = Patryk Woźnicki (PW), L = Gracjan Grzeszczak, M = Paweł Ewald,
   N = Michał Marcinkowski**, O = group discussion (not filled; O3 = lecturer's note).
   Row 3 "Makiety (4h)" covers all mockups. Sum row **258** (`=SUM(K3:K257)`).
 - `Backend` / `Frontend` layout: A = shared milestone **M1–M7**, B = package `B-x.y` / `F-x.y`,
-  C = task (original name, hours K–N), H = who. A package = one side × one feature × one milestone,
-  sized for one person (≈2–7 h average). Repo/structure/README live in package `B-1.1 Wspólne`.
+  C = task (original name), **J = assignee** (PW / GG / PE / MM) per task, K–N = hours,
+  G4:H8 = team's `COUNTIF` summary of tasks per person. A package = one side × one feature × one
+  milestone; assignment is per task, so a package may have several people (e.g. F-2.1).
+  Repo/structure/README live in package `B-1.1 Wspólne`. Frontend styling: **Bootstrap** (not Tailwind).
 - Hours only on tasks (leaves); packages and branches have no subtotals.
 - **Estimation is closed** — lecturer's note in O3 says not to fill it any more. Don't add hours.
-- **Updating after the user changes the master file** — never just copy it over the repo file (that
-  drops the generated sheets). Instead run:
-  `python tools/wbs_build.py ../WBS_SAMOZAMYKACZ_2026.xlsx docs/estimates/WBS_SAMOZAMYKACZ_2026.xlsx`
-  If task or branch names changed, the script stops on an assertion — update `MILESTONES` / `PLAN`
-  in the script, then re-run. Check that Backend + Frontend totals equal `WBS (czysty)`.
+- **Derived sheets copy hours from `WBS`.** If hours in `WBS` change, update K–N in `WBS - Czysty`,
+  `Backend` and `Frontend` in place (match rows by task name; disambiguate duplicates such as
+  "walidacja danych" by branch). Touch nothing else — J, G4:H8 and labels are the team's.
+  Then check Backend + Frontend totals = `WBS - Czysty`, and `WBS - Czysty` = `WBS` minus red rows.
+- **Never run `tools/wbs_build.py` on the current file, and never copy `../WBS_SAMOZAMYKACZ_2026.xlsx`
+  over it** — both would erase the assignments, the estimate corrections and the sheet rename.
+  Back up the file before any scripted edit.
 
 ## Git conventions
 - Remote: `origin` → `https://github.com/PeWuPL/AI-Fitness-Tracker.git`.
@@ -97,6 +102,7 @@ Sheets in the repo file:
 - SRS .docx has sections 1–7 filled (functional reqs 3.1–3.12, UI-1…UI-13, interfaces, quality, i18n);
   still empty: 1.4, 4.1 data model, 8, glossary (Suplement A), Suplement B. Out-of-scope items still to
   be removed from the .docx (OPEN_ISSUES item 7).
-- WBS estimates (closed): `WBS` PW 74 / GG 53 / PE 126.5 / MM 158 h; `WBS (czysty)` 73 / 53 / 126 / 158 h.
-- Next likely steps: resolve `docs/OPEN_ISSUES.md` (esp. item 5), assign packages (column H),
+- WBS estimates (closed; PE and MM corrected 2026-11-26): `WBS` PW 74 / GG 53 / PE 93 / MM 86.5 h;
+  `WBS - Czysty` 73 / 53 / 92.5 / 86.5 h. Assignments done in column J; a few tasks still unassigned (OPEN_ISSUES).
+- Next likely steps: resolve `docs/OPEN_ISSUES.md` (esp. item 5), assign the remaining tasks (column J),
   milestone dates, data model (ERD), mockups, then scaffold the Symfony + Next.js repos.

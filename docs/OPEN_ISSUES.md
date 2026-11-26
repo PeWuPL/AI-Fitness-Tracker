@@ -1,6 +1,6 @@
 # Otwarte kwestie i niespójności
 
-Stan: SRS z .docx i `estimates/WBS_SAMOZAMYKACZ_2026.xlsx` z arkuszami `WBS (czysty)`, `Backend`, `Frontend` (2026-11-26).
+Stan: SRS z .docx i `estimates/WBS_SAMOZAMYKACZ_2026.xlsx` z arkuszami `WBS - Czysty`, `Backend`, `Frontend` (2026-11-26).
 
 ## SRS — niespójności wewnętrzne
 1. **Wersja angielska:** 2.3 — „opcjonalne rozszerzenie”; WF-12.16 i WIL-1 — wymóg PL + EN. Ustalić jedno.
@@ -25,13 +25,17 @@ Stan: SRS z .docx i `estimates/WBS_SAMOZAMYKACZ_2026.xlsx` z arkuszami `WBS (czy
     konto), UI-3.2, UI-11.2.2–11.2.5, UI-11.3.2–11.3.4, aktywacja w IP-2, IP-7 (SMTP), IK-5, usuwanie konta w 4.3 i 2.2.
 8. **Skutki pracy lokalnej do potwierdzenia w SRS:** OG-5 (dane w UE), IK-1 (HTTPS), atrybut `Secure` ciasteczek (IK-3)
     — przy uruchomieniu lokalnym bez HTTPS nie mają zastosowania albo wymagają doprecyzowania.
-9. **Kolumna H (kto) pusta** — przypisać pakiety osobom.
+9. **Zadania bez osoby (kolumna J):** F-1.1 Makiety (4 h), B-7.1 — wszystkie 3 zadania (CSRF, ukrywanie błędów,
+   minimalizacja danych), F-7.2 „ograniczenie animacji (prefers-reduced-motion)”.
+10. **Nierówne obciążenie** (średnia z szacunków): PW 28,5 h, MM 16,6 h, PE 14,1 h, GG 9,9 h, nieprzypisane 7,3 h.
 
 ## Ogólne
-10. **Kalorie:** przyjęto ręczne wpisywanie. Alternatywa: szacowanie z formy, czasu i wagi z profilu (nowe wymaganie).
-11. Terminy kamieni milowych M1–M7 od prowadzącego.
+11. **Kalorie:** przyjęto ręczne wpisywanie. Alternatywa: szacowanie z formy, czasu i wagi z profilu (nowe wymaganie).
+12. Terminy kamieni milowych M1–M7 od prowadzącego.
 
 ## Rozwiązane (2026-11-26)
+- Licznik zadań w `Frontend`!H5:H8 obejmuje wszystkie zadania (`$J$5:$J$69`).
+- Przydział osób do zadań wpisany w arkuszach `Backend` / `Frontend` (kolumna J).
 - **Poza zakresem (decyzja zespołu):** e-mail aktywacyjny, zmiana hasła, usunięcie konta. Projekt działa lokalnie,
   bez wdrożenia — brak SMTP i wysyłki e-maili.
 - Administrator usunięty z SRS (klasy: UŻ-1 niezalogowany, UŻ-2 zarejestrowany) — zgodne z WBS (`ROLE_USER`).

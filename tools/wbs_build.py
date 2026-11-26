@@ -1,4 +1,7 @@
-"""Generuje arkusze pochodne WBS.
+"""Generuje arkusze pochodne WBS (jednorazowo).
+
+UWAGA: od 2026-11-26 zespół edytuje plik w repo bezpośrednio (przydział osób, korekty
+szacunków). Skrypt nie nadpisuje istniejącego pliku — patrz AGENTS.md.
 
 Użycie (z katalogu repo, openpyxl w venv):
     python tools/wbs_build.py ../WBS_SAMOZAMYKACZ_2026.xlsx docs/estimates/WBS_SAMOZAMYKACZ_2026.xlsx
@@ -260,8 +263,12 @@ def reorg(P):
     wb.save(P)
 
 if __name__ == '__main__':
+    import os
     if len(sys.argv) != 3:
         sys.exit(__doc__)
+    if os.path.exists(sys.argv[2]):
+        sys.exit(f'{sys.argv[2]} już istnieje — nie nadpisuję (zawiera przydział osób i korekty zespołu). '
+                 'Podaj nową ścieżkę wyjściową.')
     build(sys.argv[1], sys.argv[2])
     reorg(sys.argv[2])
     print('zapisano', sys.argv[2])
