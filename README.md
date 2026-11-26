@@ -10,4 +10,5 @@ Etap: dokumentacja i planowanie. Zobacz:
 - `docs/SRS.md` — specyfikacja wymagań
 - `docs/WBS.md` i `docs/estimates/` — podział prac i szacowanie (Delphi)
 - `docs/OPEN_ISSUES.md` — otwarte kwestie
-- `CLAUDE.md` — kontekst dla Claude Code
+- `AGENTS.md` — kontekst i zasady dla agentów AI (Claude Code, Codex, Cursor itd.)
+- `CLAUDE.md` — import `AGENTS.md` dla Claude Code
