@@ -10,5 +10,6 @@ Etap: dokumentacja i planowanie. Zobacz:
 - `docs/SRS.md` — specyfikacja wymagań
 - `docs/WBS.md` i `docs/estimates/` — podział prac i szacowanie (Delphi)
 - `docs/OPEN_ISSUES.md` — otwarte kwestie
+- `tools/wbs_build.py` — pierwotny generator arkuszy pakietów WBS (nie uruchamiać na obecnym pliku — patrz `AGENTS.md`)
 - `AGENTS.md` — kontekst i zasady dla agentów AI (Claude Code, Codex, Cursor itd.)
 - `CLAUDE.md` — import `AGENTS.md` dla Claude Code

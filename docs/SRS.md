@@ -3,6 +3,9 @@
 > Kopia robocza dokumentu `SRS-SAMOZAMYKACZ_2026.docx` (stan z 2026-11-26). W razie rozbieżności wiążący
 > jest plik .docx. Pominięto opisy szablonu; zostawiono pytania pomocnicze z odpowiedziami.
 > Niespójności: `OPEN_ISSUES.md`.
+>
+> **Decyzja zespołu (2026-11-26):** projekt działa lokalnie, bez wdrożenia. Poza zakresem: e-mail aktywacyjny,
+> zmiana hasła i usunięcie konta. Odpowiednie punkty są przekreślone poniżej; w .docx jeszcze ich nie usunięto.
 
 ---
 
@@ -76,7 +79,7 @@ Osoba aktywna fizycznie (regularnie trenująca lub początkująca). Po zalogowan
 - przeglądać, filtrować, edytować i usuwać historię aktywności,
 - wyświetlać podsumowania z wybranego okresu oraz ustawiać i śledzić cele treningowe,
 - dostosowywać kolejność i widoczność kart,
-- zarządzać kontem (zmiana hasła, usunięcie konta) i wylogować się.
+- ~~zarządzać kontem (zmiana hasła, usunięcie konta)~~ i wylogować się.
 
 Każdy użytkownik ma dostęp wyłącznie do własnych danych.
 
@@ -149,7 +152,7 @@ Wprowadzenie danych o ćwiczeniu na ekranie „Mierzenie aktywności” i obejrz
 
 **3.1.2 Wymagania funkcjonalne**
 - WF-1.1: System pozwala na rejestrację konta przy użyciu adresu e-mail i hasła.
-- WF-1.2: System musi wysłać e-mail z linkiem aktywacyjnym. Bez aktywacji logowanie nie jest możliwe.
+- ~~WF-1.2: System musi wysłać e-mail z linkiem aktywacyjnym. Bez aktywacji logowanie nie jest możliwe.~~ — **poza zakresem**
 - WF-1.3: System musi odrzucić rejestrację, gdy e-mail jest zajęty albo hasło ma mniej niż 8 znaków, i wyświetlić komunikat.
 - WF-1.4: System pozwala na logowanie e-mailem i hasłem. Przy błędnych danych pokazuje ogólny komunikat (bez ujawniania, czy konto istnieje).
 - WF-1.5: System musi czasowo zablokować logowanie po 5 nieudanych próbach.
@@ -238,10 +241,10 @@ Wprowadzenie danych o ćwiczeniu na ekranie „Mierzenie aktywności” i obejrz
 
 **3.10.2 Wymagania funkcjonalne**
 - WF-10.1: System pozwala na edycję danych profilu (imię, wiek, waga, wzrost).
-- WF-10.2: System pozwala na zmianę hasła po podaniu obecnego hasła.
+- ~~WF-10.2: System pozwala na zmianę hasła po podaniu obecnego hasła.~~ — **poza zakresem**
 - WF-10.3: System pozwala na wybór ulubionej aktywności wyświetlanej na głównym wykresie.
 - WF-10.4: System pozwala na wylogowanie.
-- WF-10.5: System pozwala na usunięcie konta wraz ze wszystkimi danymi (RODO), po potwierdzeniu hasłem.
+- ~~WF-10.5: System pozwala na usunięcie konta wraz ze wszystkimi danymi (RODO), po potwierdzeniu hasłem.~~ — **poza zakresem**
 
 ### 3.11 Filtrowanie historii aktywności
 **3.11.1 Opis** — Wyszukiwanie zapisanych aktywności przez filtrowanie historii. Priorytet: **średni**
@@ -290,7 +293,7 @@ Wprowadzenie danych o ćwiczeniu na ekranie „Mierzenie aktywności” i obejrz
 ### 4.3 Pozyskiwanie, integralność, przechowywanie i usuwanie danych
 - **Pozyskiwanie:** użytkownik ręcznie wprowadza formę, datę i wartość, opcjonalnie kroki, kalorie i notatkę. Brak automatycznego pobierania z GPS i zegarków.
 - **Integralność i przechowywanie:** baza SQLite przez Doctrine. Walidacja pól wymaganych, typów liczbowych, zakresów dat i relacji użytkownik–forma–aktywność.
-- **Usuwanie:** użytkownik usuwa własne aktywności i cele oraz trwale usuwa konto z danymi po potwierdzeniu hasłem. Usunięcie formy usuwa jej obserwacje po ostrzeżeniu.
+- **Usuwanie:** użytkownik usuwa własne aktywności i cele ~~oraz trwale usuwa konto z danymi po potwierdzeniu hasłem~~ (poza zakresem). Usunięcie formy usuwa jej obserwacje po ostrzeżeniu.
 
 ---
 
@@ -305,12 +308,12 @@ Interfejs dostępny przez przeglądarkę, dostosowany do urządzeń mobilnych i 
 - UI-1.3 Stopka: odnośnik do polityki prywatności (1.3.1).
 
 **UI-2: Ekran logowania**
-- UI-2.1 Formularz: pole e-mail (2.1.1), pole hasła (2.1.2), przycisk „Zaloguj się” (2.1.3), komunikat błędnych danych (2.1.4), komunikat o nieaktywnym koncie lub czasowej blokadzie (2.1.5).
+- UI-2.1 Formularz: pole e-mail (2.1.1), pole hasła (2.1.2), przycisk „Zaloguj się” (2.1.3), komunikat błędnych danych (2.1.4), komunikat o ~~nieaktywnym koncie lub~~ czasowej blokadzie (2.1.5).
 - UI-2.2 Nawigacja: odnośnik do rejestracji (2.2.1).
 
 **UI-3: Ekran rejestracji**
 - UI-3.1 Formularz: pole e-mail (3.1.1), pole hasła (3.1.2), przycisk „Zarejestruj się” (3.1.3), komunikaty: nieprawidłowy e-mail (3.1.4), hasło krótsze niż 8 znaków (3.1.5), zajęty e-mail (3.1.6).
-- UI-3.2 Potwierdzenie: informacja o wysłaniu wiadomości aktywacyjnej (3.2.1), komunikat o poprawnej aktywacji (3.2.2).
+- ~~UI-3.2 Potwierdzenie: informacja o wysłaniu wiadomości aktywacyjnej (3.2.1), komunikat o poprawnej aktywacji (3.2.2).~~ — **poza zakresem**
 - UI-3.3 Nawigacja: odnośnik do logowania (3.3.1).
 
 **UI-4: Nawigacja części zamkniętej**
@@ -343,8 +346,8 @@ Interfejs dostępny przez przeglądarkę, dostosowany do urządzeń mobilnych i 
 
 **UI-11: Panel użytkownika**
 - UI-11.1 Profil: imię (11.1.1), wiek (11.1.2), waga (11.1.3), wzrost (11.1.4), zapis (11.1.5).
-- UI-11.2 Ustawienia: ulubiona aktywność (11.2.1), zmiana hasła (11.2.2), obecne hasło (11.2.3), nowe hasło (11.2.4), zatwierdzenie (11.2.5).
-- UI-11.3 Konto: „Wyloguj się” (11.3.1), „Usuń konto” (11.3.2), potwierdzenie usunięcia (11.3.3), hasło do potwierdzenia (11.3.4).
+- UI-11.2 Ustawienia: ulubiona aktywność (11.2.1), ~~zmiana hasła (11.2.2), obecne hasło (11.2.3), nowe hasło (11.2.4), zatwierdzenie (11.2.5)~~ (poza zakresem).
+- UI-11.3 Konto: „Wyloguj się” (11.3.1), ~~„Usuń konto” (11.3.2), potwierdzenie usunięcia (11.3.3), hasło do potwierdzenia (11.3.4)~~ (poza zakresem).
 
 **UI-12: Elementy wspólne**
 - UI-12.1 Komunikaty i formularze: błędy przy polach (12.1.1), potwierdzenia operacji (12.1.2), potwierdzenia usuwania (12.1.3).
@@ -357,12 +360,12 @@ Interfejs dostępny przez przeglądarkę, dostosowany do urządzeń mobilnych i 
 ### 5.2 Interfejsy programowe
 **Czy łączy się z jakimś API?**
 - IP-1: Frontend Next.js komunikuje się z backendem Symfony przez REST API (API Platform), dane w JSON.
-- IP-2: API obsługuje rejestrację i aktywację konta, logowanie, odświeżanie tokenów JWT, wylogowanie i operacje na profilu.
+- IP-2: API obsługuje rejestrację ~~i aktywację~~ konta, logowanie, odświeżanie tokenów JWT, wylogowanie i operacje na profilu.
 - IP-3: API udostępnia CRUD aktywności, form ćwiczeń, celów i preferencji kart oraz filtrowanie, sortowanie i statystyki okresowe.
 - IP-4: Serwer waliduje dane wejściowe, sprawdza uprawnienia do własnych zasobów i zwraca czytelne odpowiedzi o powodzeniu lub błędzie.
 - IP-5: Symfony używa Doctrine ORM do bazy SQLite (konta, aktywności, formy, cele, preferencje).
 - IP-6: Chart.js z obsługą zoom prezentuje wykresy, Swiper obsługuje przewijanie kart.
-- IP-7: Serwer wysyła e-maile aktywacyjne przez SMTP. Brak integracji z zewnętrznymi API sportowymi i urządzeniami pomiarowymi.
+- IP-7: ~~Serwer wysyła e-maile aktywacyjne przez SMTP.~~ (poza zakresem) Brak integracji z zewnętrznymi API sportowymi i urządzeniami pomiarowymi.
 - IP-8: Tokeny JWT; po wygaśnięciu tokenu dostępowego sesja może być odnowiona ważnym tokenem odświeżania.
 
 ### 5.3 Interfejsy sprzętowe
@@ -376,7 +379,7 @@ Interfejs dostępny przez przeglądarkę, dostosowany do urządzeń mobilnych i 
 - IK-2: Standardowe metody HTTP (GET, POST, PATCH/PUT, DELETE), dane w JSON.
 - IK-3: Uwierzytelnianie tokenami JWT; tokeny w ciasteczkach z atrybutami HttpOnly, Secure, SameSite; dostęp do danych prywatnych sprawdzany po stronie serwera.
 - IK-4: Po wygaśnięciu tokenu frontend próbuje odświeżyć sesję; jeśli się nie da — przekierowuje do logowania.
-- IK-5: Backend wysyła e-maile aktywacyjne przez SMTP. Nie przewiduje się e-maili resetu hasła.
+- ~~IK-5: Backend wysyła e-maile aktywacyjne przez SMTP. Nie przewiduje się e-maili resetu hasła.~~ — **poza zakresem** (brak wysyłki e-maili)
 - IK-6: Serwer zwraca komunikaty o wyniku operacji (w tym błędy walidacji i komunikacji); interfejs je wyświetla.
 - IK-7: CORS ograniczony do uprawnionych źródeł frontendu.
 
@@ -456,7 +459,6 @@ Interfejs dostępny przez przeglądarkę, dostosowany do urządzeń mobilnych i 
 | SQLite | Plikowa relacyjna baza danych używana przez aplikację. |
 | JWT | JSON Web Token — token uwierzytelniający żądania do API. |
 | CORS | Mechanizm zezwalający frontendowi na żądania do API pod innym adresem. |
-| SMTP | Protokół wysyłki e-maili (wiadomości aktywacyjne). |
 | Responsywność / mobile first | Dopasowanie interfejsu do ekranu, projektowane najpierw dla telefonu. |
 | Edycja inline | Edycja danych bezpośrednio na liście. |
 | RODO / GDPR | Rozporządzenie UE o ochronie danych osobowych. |
