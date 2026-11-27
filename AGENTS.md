@@ -18,11 +18,14 @@ wants template questions answered **directly** (bullet question → direct answe
 - Charts must support zoom and pan left/right.
 - Theme: sport (agreed for the whole lab group). Tech outside the list → ask the lecturer on Teams.
 
+- Database: **SQLite** via Doctrine ORM + Doctrine Migrations (per SRS 2.3).
+
 ## User classes (final)
-- **UŻ-1** Użytkownik główny — logs activities, views charts/history/summaries.
-- **UŻ-2** Gość — unauthenticated, public pages only.
-- **UŻ-3** Administrator — account management, default exercise types.
-- **No trainer/coach role** — explicitly removed by the user. Do not reintroduce it.
+- **UŻ-1** Użytkownik niezalogowany — public pages only (home, privacy policy, register, log in).
+- **UŻ-2** Użytkownik zarejestrowany — logs activities, charts, history (filter/sort), summaries,
+  training goals, own exercise types, account settings. Sees only own data.
+- **No administrator and no trainer/coach role** — both removed by the user. Do not reintroduce them.
+- No password-reset e-mails (SRS IK-5); only activation e-mails via SMTP.
 - Data is entered **manually** (no automatic sensor/device sync — it's a web app).
 
 ## UI (as described by the user)
@@ -30,26 +33,29 @@ Bottom ribbon with 3 buttons: **Menu główne (Home)**, **Mierzenie aktywności 
 - Home: chart of the user's favourite activity for the day (scrollable); swipeable cards
   (other charts / stats, configurable order); below: activity history with short summary.
 - Record: form to enter exercise data.
-- O mnie: summary for a period (default: month) + user panel (incl. logout).
+- O mnie: summary for a period (default: month), training goals with progress, user panel (incl. logout).
 - Also a "Szczegóły aktywności" (activity details) screen: view / edit / delete.
 - History list sortable by **date, steps, burned calories**; activity has optional `kroki`, `spalone kalorie`.
 
 ## Repo docs
-- `docs/SRS.md` — consolidated informal SRS (sections 2.2–2.5, 3.1–3.12, glossary). Source of truth for requirements.
-- `docs/WBS.md` — WBS structure summary, Delphi estimation method and current numbers.
-- `docs/estimates/WBS_SAMOZAMYKACZ_2026_2.xlsx` — latest WBS spreadsheet (the user edits it in Excel).
+- The user's master copies live **outside the repo**, one level up:
+  `../SRS-SAMOZAMYKACZ_2026.docx` and `../WBS_SAMOZAMYKACZ_2026.xlsx`. They win over repo copies.
+  When the user says they were updated, re-read them and sync the files below.
+- `docs/SRS.md` — Markdown mirror of the SRS .docx (sections 1–8, UI-x, IP/IS/IK, WN, WIL, glossary proposal).
+- `docs/WBS.md` — WBS layout, per-person totals, version history.
+- `docs/estimates/WBS_SAMOZAMYKACZ_2026_3.xlsx` — copy of the latest WBS spreadsheet.
 - `docs/OPEN_ISSUES.md` — unresolved questions and known inconsistencies. Check before editing docs.
+- Reading the files: no pandoc/python-docx/openpyxl system-wide — parse .docx XML with `zipfile`,
+  and use openpyxl from a throwaway venv.
 
 ## Working with the WBS spreadsheet
-- Sheet `WBS`: tree levels in columns **B–E** (B = top level), A = milestones, H = assignee,
-  J–N = Delphi individual estimates per person, O = hours after group discussion.
-- Column **J = person "PW"** (header cell still says "Imię i Nazwisko"; user fills names).
-- Hours go **only on leaf tasks** (no children) to avoid double counting. Sum row at **287**
-  (`=SUM(J3:J255)` etc.). Note in row 289 explains the AI-assisted reduction factors.
-- The user restructures the sheet between versions: always re-read it, map hours by task
-  name + section context (e.g. "Makiety" vs "Frontend" duplicates), and never touch cells
-  the user said to leave. Don't overwrite the user's template labels (J1:O9 area) without asking.
-- Use openpyxl; keep the user's layout; verify with a formula recalculation after edits.
+- Sheet `WBS`: tree levels in columns **B–E** (B = top level), A = milestones, H = assignee (empty),
+  J = template labels, **K = Patryk Woźnicki (PW), L = Gracjan Grzeszczak, M = Paweł Ewald,
+  N = Michał Marcinkowski**, O = group discussion (not filled).
+- Row 3 "Makiety (4h)" covers all mockups. Hours only on leaf tasks. Sum row **258** (`=SUM(K3:K257)`).
+- **Estimation is closed** — lecturer's note in O3 says not to fill it any more. Don't add hours.
+- The user restructures the sheet between versions: always re-read it and never touch cells
+  the user said to leave. Use openpyxl; keep the user's layout.
 
 ## Git conventions
 - Remote: `origin` → `https://github.com/PeWuPL/AI-Fitness-Tracker.git`.
@@ -61,9 +67,9 @@ Bottom ribbon with 3 buttons: **Menu główne (Home)**, **Mierzenie aktywności 
 - Don't commit directly to `main`; push the branch and merge via PR.
 
 ## Status / where we left off
-- SRS sections 2.2–2.5, 3 (with 3.x.1 Opis + 3.x.2 Wymagania funkcjonalne), accessibility (3.12),
-  sorting and glossary are drafted (see `docs/SRS.md`).
-- WBS v2026_2 has PW's Delphi hours, reduced for AI-assisted coding: **194.5 h** total
-  (was 339.5 h before the reduction).
-- Next likely steps: resolve `docs/OPEN_ISSUES.md`, collect other members' estimates (K–N),
-  group-discussion column O, milestone dates, then scaffold the Symfony + Next.js repos.
+- SRS .docx has sections 1–7 filled (functional reqs 3.1–3.12, UI-1…UI-13, interfaces, quality, i18n);
+  still empty: 1.4, 4.1 data model, 8, glossary (Suplement A), Suplement B.
+- WBS v2026_3: estimates from all four members — PW 74 h, GG 53 h, PE 126.5 h, MM 158 h. Closed.
+- Don't edit the .docx/.xlsx master copies unless asked; the user fixes typos in the .docx themselves.
+- Next likely steps: resolve `docs/OPEN_ISSUES.md`, assign tasks (column H), milestone dates,
+  data model (ERD), mockups, then scaffold the Symfony + Next.js repos.

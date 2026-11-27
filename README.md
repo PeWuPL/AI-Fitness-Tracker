@@ -3,7 +3,7 @@
 Projekt laboratoryjny: responsywna (mobile first) aplikacja webowa do zapisywania aktywności fizycznej
 i wyświetlania wykresów dla każdej formy ćwiczeń.
 
-- Backend: PHP 8.2+, Symfony, API Platform, Doctrine ORM, PostgreSQL
+- Backend: PHP 8.2+, Symfony, API Platform, Doctrine ORM, SQLite
 - Frontend: Next.js (TypeScript)
 
 Etap: dokumentacja i planowanie. Zobacz:
